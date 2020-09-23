@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  字体大小  -->
+    <dimen name="font_huge_xxx">36sp</dimen>
+    <dimen name="font_huge_xx">34sp</dimen>
+    <dimen name="font_huge_x">32sp</dimen>
+    <dimen name="font_huge">30sp</dimen>
+    <dimen name="font_huge_s">28sp</dimen>
+    <dimen name="font_large_x">26sp</dimen>
+    <dimen name="font_large">24sp</dimen>
+    <dimen name="font_large_s">22sp</dimen>
+    <dimen name="font_medium_x">20sp</dimen>
+    <dimen name="font_medium">18sp</dimen>
+    <dimen name="font_medium_s">16sp</dimen>
+    <dimen name="font_small_x">14sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_small_s">10sp</dimen>
+    <dimen name="font_mini_x">8sp</dimen>
+    <dimen name="font_mini">6sp</dimen>
+    <dimen name="font_mini_s">4sp</dimen>
+</resources>

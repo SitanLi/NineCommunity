@@ -1,0 +1,52 @@
+ext {
+    android = [
+            compileSdkVersion: 28,
+            minSdkVersion    : 16,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0",
+    ]
+    def room_version = "2.2.5"
+    def kodein_versions="7.0.0"
+    dependencies = [
+            kotlin_stdlib_jdk7    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            appcompat             : 'androidx.appcompat:appcompat:1.1.0',
+
+            //retrofit2
+            retrofit              : 'com.squareup.retrofit2:retrofit:2.6.2',
+            converter_scalars     : 'com.squareup.retrofit2:converter-scalars:2.3.0',
+            converter_gson        : 'com.squareup.retrofit2:converter-gson:2.6.0',
+            adapter_rxjava2       : 'com.squareup.retrofit2:adapter-rxjava2:2.6.0',
+            //RxJava
+            rxkotlin              : "io.reactivex.rxjava2:rxkotlin:2.4.0",
+            rxjava                : 'io.reactivex.rxjava2:rxjava:2.2.10',
+            rxandroid             : 'io.reactivex.rxjava2:rxandroid:2.0.2',
+            //lifecycle
+            lifecycle_extensions  : 'androidx.lifecycle:lifecycle-extensions:2.0.0',
+            rxlifecycle_components: 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0',
+            rxlifecycle_kotlin    : 'com.trello.rxlifecycle3:rxlifecycle-kotlin:3.1.0',
+
+            //友盟统计
+            analytics             : 'com.umeng.umsdk:analytics:8.0.0',
+            common                : 'com.umeng.umsdk:common:2.0.0',
+
+            cym_chad_adapter      : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11',
+            glide_compiler        : 'com.github.bumptech.glide:compiler:4.9.0',
+            //工具
+            utilcode              : "com.blankj:utilcodex:1.29.0",
+            free_proguard         : "com.blankj:free-proguard:1.0.1",
+            recyclerview          : 'androidx.recyclerview:recyclerview:1.1.0',
+
+            //navigation
+            navigation_fragment   : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            navigation_ui_ktx     : "androidx.navigation:navigation-ui-ktx:$nav_version",
+            multidex              : 'com.android.support:multidex:1.0.3',
+            //room
+            room_runtime: "androidx.room:room-runtime:$room_version",
+            room_ktx: "androidx.room:room-ktx:$room_version",
+            //kodein
+            kodein_core : "org.kodein.di:kodein-di-framework-android-core:$kodein_versions",
+            kodein_androidx:"org.kodein.di:kodein-di-framework-android-x:$kodein_versions"
+
+    ]
+}

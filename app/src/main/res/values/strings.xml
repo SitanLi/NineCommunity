@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NineCommunity</string>
+    <string name="loading">加载中&#8230;</string>
+    <string name="request_data">请求网络数据</string>
+    <string name="update_app_msg">版本更新&#8230;</string>
+    <string name="update_confirm">下载更新</string>
+    <string name="app_update_tips">正在更新数据:(%d%%)</string>
+    <string name="true_btn">确定</string>
+    <string name="confirm_btn">确认</string>
+    <string name="cancel_btn">取消</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_tv">Hello blank </string>
+    <string name="hello_blank_down">Hello down</string>
+</resources>

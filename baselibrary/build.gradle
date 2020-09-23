@@ -1,0 +1,83 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api rootProject.ext.dependencies.kotlin_stdlib_jdk7
+    api rootProject.ext.dependencies.appcompat
+    //retrofit2
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.converter_scalars
+    api rootProject.ext.dependencies.converter_gson
+    api rootProject.ext.dependencies.adapter_rxjava2
+
+    //RxJava
+    api rootProject.ext.dependencies.rxkotlin
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    //OKHttp
+    api('com.squareup.okhttp3:okhttp') { version { strictly '3.12.12' } }
+    //lifecycle
+    api rootProject.ext.dependencies.lifecycle_extensions
+    api rootProject.ext.dependencies.rxlifecycle_components
+    api rootProject.ext.dependencies.rxlifecycle_kotlin
+
+    //友盟统计
+    api rootProject.ext.dependencies.analytics
+    api rootProject.ext.dependencies.common
+    //工具
+    api rootProject.ext.dependencies.utilcode
+    api rootProject.ext.dependencies.free_proguard
+
+    api rootProject.ext.dependencies.cym_chad_adapter
+
+    api rootProject.ext.dependencies.recyclerview
+    api("com.github.bumptech.glide:glide:4.10.0") {
+        exclude group: "com.android.support"
+    }
+    kapt rootProject.ext.dependencies.glide_compiler
+
+//navigation
+    api rootProject.ext.dependencies.navigation_fragment
+    api rootProject.ext.dependencies.navigation_ui_ktx
+    api rootProject.ext.dependencies.multidex
+
+    //room
+    api rootProject.ext.dependencies.room_runtime
+    api rootProject.ext.dependencies.room_ktx
+
+    //kodein
+    api rootProject.ext.dependencies.kodein_core
+    api rootProject.ext.dependencies.kodein_androidx
+
+}

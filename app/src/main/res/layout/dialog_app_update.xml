@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="app"
+            type="com.mall.ninecommunity.dialog.AppUpdateDialog" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="update"
+            type="com.mall.ninecommunity.model.VersionBean" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="397dp"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:id="@+id/bg_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/nine_download_bg" />
+
+        <TextView
+            android:id="@+id/mLine"
+            style="@style/dialog_title"
+            android:layout_marginTop="191dp"
+            android:text="@string/update_app_msg"
+            android:textColor="@color/public_red_color" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/dialog_title"
+            android:layout_height="68.5dp"
+            android:layout_below="@id/mLine"
+            android:layout_marginTop="18.5pt"
+            android:gravity="start"
+            android:paddingLeft="21.5dp"
+            android:paddingRight="21.5dp"
+            android:text="@{update.remark}"
+            android:textSize="@dimen/font_small" />
+
+        <LinearLayout
+            android:id="@+id/force_update_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{update.musted == 0 ? View.GONE : View.VISIBLE}">
+
+            <com.mall.ninecommunity.widget.TextProgressView
+                android:id="@+id/progressView"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="20.5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20.5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@mipmap/nine_app_update_progress_bg"
+                android:max="100"
+                android:progress="@{update.progress}"
+                android:progressDrawable="@drawable/progress_app_update" />
+
+            <TextView
+                android:id="@+id/progress_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{update.progressTips}"
+                android:textSize="@dimen/font_small" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/no_force_update_layout"
+            layout="@layout/dialog_bottom_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:visibility="@{update.musted == 0 ? View.VISIBLE : View.GONE}"
+            bind:cancel="@{app::cancel}"
+            bind:confirm="@{app::confirm}" />
+
+    </RelativeLayout>
+</layout>

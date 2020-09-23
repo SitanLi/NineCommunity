@@ -1,0 +1,29 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="bean"
+            type="com.mall.ninecommunity.model.main.Plant"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/plant_item_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="@{bean.plantName}"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{clickListener}"
+                    tools:text="Tomato"/>
+
+    </FrameLayout>
+
+</layout>
