@@ -76,10 +76,6 @@ dependencies {
     api rootProject.ext.dependencies.room_runtime
     api rootProject.ext.dependencies.room_ktx
 
-    //kodein
-    api rootProject.ext.dependencies.kodein_core
-    api rootProject.ext.dependencies.kodein_androidx
-
     //constraint
     api rootProject.ext.dependencies.constraint_layout
     //loadsir

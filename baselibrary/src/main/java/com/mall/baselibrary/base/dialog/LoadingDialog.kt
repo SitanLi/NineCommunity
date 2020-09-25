@@ -9,7 +9,7 @@ import com.mall.baselibrary.databinding.DialogLoadingBinding
 /**
  * LoadingDialog
  */
-class LoadingDialog(context: Context, themeResId: Int) : BaseNoModelDialog<DialogLoadingBinding>(context, themeResId) {
+class LoadingDialog(context: Context, themeResId: Int) : BaseDialog<DialogLoadingBinding>(context, themeResId) {
     override fun initBindingResId(): Int = R.layout.dialog_loading
 
     init {

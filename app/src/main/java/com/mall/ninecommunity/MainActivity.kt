@@ -28,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initData() {
         downloadViewModel.initData()
         downloadViewModel.versionBean.observe(this, Observer {
-            if (BuildConfig.DEBUG)return@Observer
+//            if (BuildConfig.DEBUG)return@Observer
             AppUpdateDialog(this, it).show()
         })
     }

@@ -24,13 +24,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 /**
  *Time:2020/8/31
  *Author:HevenHolt
  *Description:
  */
-class DownloadControllerIml(private val downloadInfoDao: DownloadInfoDao) : DownloadController {
+class DownloadControllerIml @Inject constructor(private val downloadInfoDao: DownloadInfoDao) : DownloadController {
     /*记录下载数据*/
     private val downInfos: MutableSet<DownloadInfo>
 

@@ -11,12 +11,8 @@ import com.kingja.loadsir.core.LoadSir
 import com.mall.baselibrary.loadSir.ErrorCallback
 import com.mall.baselibrary.loadSir.LoadingCallback
 import com.mall.baselibrary.selector.XSelector
-import com.mall.ninecommunity.di.appConfigModule
 import com.mall.ninecommunity.utils.imageload.ImageLoadConfig
 import dagger.hilt.android.HiltAndroidApp
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.android.x.androidXModule
 
 /**
  *@Time :2019/10/30
@@ -24,11 +20,7 @@ import org.kodein.di.android.x.androidXModule
  *TODO : Application
  */
 @HiltAndroidApp
-class NineApplication : Application(), DIAware {
-    override val di: DI by DI.lazy {
-        import(androidXModule(this@NineApplication))
-        import(appConfigModule)
-    }
+class NineApplication : Application() {
 
     companion object {
         private var instance: NineApplication? = null

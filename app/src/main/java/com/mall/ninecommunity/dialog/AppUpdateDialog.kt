@@ -7,20 +7,19 @@ import android.view.ViewGroup
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.LogUtils
-import com.mall.baselibrary.base.dialog.BaseNoModelDialog
+import com.blankj.utilcode.util.Utils
+import com.mall.baselibrary.base.dialog.BaseDialog
 import com.mall.ninecommunity.R
 import com.mall.ninecommunity.controller.inter.DownloadController
 import com.mall.ninecommunity.databinding.DialogAppUpdateBinding
 import com.mall.ninecommunity.download.listener.HttpDownOnNextListener
+import com.mall.ninecommunity.hilt.ControllerEntryPoint
 import com.mall.ninecommunity.model.DownloadInfo
 import com.mall.ninecommunity.model.VersionBean
 import com.mall.ninecommunity.utils.PathUnifyUtils
+import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.android.di
-import org.kodein.di.instance
 import java.io.File
 
 /**
@@ -28,9 +27,8 @@ import java.io.File
  *@author: Lixiaoping
  * 下载更新dialog
  */
-class AppUpdateDialog(context: Context, private var versionVo: VersionBean) : BaseNoModelDialog<DialogAppUpdateBinding>(context, R.style.public_Theme_dialog), DIAware {
-    override val di: DI by di()
-    private val downloadController: DownloadController by instance()
+class AppUpdateDialog(context: Context, private var versionVo: VersionBean) : BaseDialog<DialogAppUpdateBinding>(context, R.style.public_Theme_dialog) {
+    private var downloadController: DownloadController? = null
 
     init {
         initWidthAndHeightView(Gravity.CENTER, ViewGroup.LayoutParams.MATCH_PARENT, ConvertUtils.dp2px(397f))
@@ -41,6 +39,8 @@ class AppUpdateDialog(context: Context, private var versionVo: VersionBean) : Ba
     override fun initBindingResId(): Int = R.layout.dialog_app_update
 
     private fun initData() {
+        val entryPoint = EntryPointAccessors.fromApplication(Utils.getApp(), ControllerEntryPoint::class.java)
+        downloadController = entryPoint.downloadController()
     }
 
     private fun initUI() {
@@ -73,7 +73,7 @@ class AppUpdateDialog(context: Context, private var versionVo: VersionBean) : Ba
             }
         }
         GlobalScope.launch {
-            downloadController.startDownload(versionVo.url ?: "", listener)
+            downloadController?.startDownload(versionVo.url ?: "", listener)
         }
     }
 
