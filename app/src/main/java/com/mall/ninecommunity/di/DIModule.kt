@@ -2,10 +2,10 @@ package com.mall.ninecommunity.di
 
 import com.blankj.utilcode.util.Utils
 import com.mall.ninecommunity.NineApplication
+import com.mall.ninecommunity.controller.iml.DownloadControllerIml
+import com.mall.ninecommunity.controller.inter.DownloadController
 import com.mall.ninecommunity.data.AppDataBase
 import com.mall.ninecommunity.data.dao.DownloadInfoDao
-import com.mall.ninecommunity.download.DownloadController
-import com.mall.ninecommunity.download.DownloadControllerIml
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance

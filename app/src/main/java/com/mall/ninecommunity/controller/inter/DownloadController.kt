@@ -1,4 +1,4 @@
-package com.mall.ninecommunity.download
+package com.mall.ninecommunity.controller.inter
 
 import com.mall.ninecommunity.download.listener.HttpDownOnNextListener
 import com.mall.ninecommunity.model.DownloadInfo

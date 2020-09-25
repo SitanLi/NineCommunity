@@ -4,8 +4,9 @@ import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.nio.charset.Charset
+import javax.inject.Inject
 
-class OkHttpClientLogInterceptor : Interceptor {
+class OkHttpClientLogInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         LogUtils.d("OkHttpClientRequest=${request.url()}")

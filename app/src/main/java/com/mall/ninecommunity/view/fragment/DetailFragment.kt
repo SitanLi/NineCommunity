@@ -2,13 +2,13 @@ package com.mall.ninecommunity.view.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.mall.baselibrary.base.view.BaseFragment
 import com.mall.ninecommunity.R
 import com.mall.ninecommunity.databinding.FragmentDetailBinding
-import com.mall.ninecommunity.dialog.AppUpdateDialog
-import com.mall.ninecommunity.utils.InjectorUtils
-import com.mall.ninecommunity.viewmodels.viewmodel.DownloadViewModel
+import com.mall.ninecommunity.viewmodels.viewmodel.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 
@@ -17,9 +17,10 @@ import kotlinx.android.synthetic.main.fragment_detail.*
  * Use the [DetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     private val args: DetailFragmentArgs by navArgs()
-    private val downloadViewModel: DownloadViewModel by viewModels { InjectorUtils.provideDownloadViewModelFactory() }
+    private val detailViewModel: DetailViewModel by viewModels()
 
     override fun initLayoutId(): Int = R.layout.fragment_detail
 
@@ -27,13 +28,17 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         if (args.plantName.isNotEmpty()) dataBinding.tvName.text = args.plantName
     }
 
+
     override fun initData() {
-        downloadViewModel.initData()
         tv_name.setOnClickListener {
-            AppUpdateDialog(requireContext(), R.style.public_Theme_dialog, downloadViewModel.versionBean).show()
+            detailViewModel.toShow()
         }
         tv_down.setOnClickListener {
         }
+
+        detailViewModel.newBeanLiveData.observe(this, Observer {
+            println(it)
+        })
     }
 
 }

@@ -1,13 +1,15 @@
-package com.mall.ninecommunity.download
+package com.mall.ninecommunity.controller.iml
 
 import android.os.Handler
 import android.os.Looper
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.mall.ninecommunity.controller.inter.DownloadController
 import com.mall.ninecommunity.data.dao.DownloadInfoDao
+import com.mall.ninecommunity.download.*
 import com.mall.ninecommunity.download.listener.DownloadInterceptor
 import com.mall.ninecommunity.download.listener.HttpDownOnNextListener
-import com.mall.ninecommunity.http.api.Api
+import com.mall.ninecommunity.http.api.ApiService
 import com.mall.ninecommunity.model.DownloadInfo
 import com.mall.ninecommunity.utils.PathUnifyUtils
 import com.mall.ninecommunity.utils.SDCardUtils
@@ -99,7 +101,7 @@ class DownloadControllerIml(private val downloadInfoDao: DownloadInfoDao) : Down
                     .client(builder.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .baseUrl(Api.ApiHolder.BASE_URL)
+                    .baseUrl(ApiService.BASE_URL)
                     .build()
             httpService = retrofit.create(HttpDownService::class.java)
             downloadInfo.service = httpService
@@ -174,7 +176,7 @@ class DownloadControllerIml(private val downloadInfoDao: DownloadInfoDao) : Down
                         .client(builder.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .baseUrl(Api.ApiHolder.BASE_URL)
+                        .baseUrl(ApiService.BASE_URL)
                         .build()
                 httpService = retrofit.create(HttpDownService::class.java)
                 info.service = httpService

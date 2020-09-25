@@ -24,13 +24,13 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/plant_list"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".MainActivity"
-            tools:listitem="@layout/list_item_plant"/>
+            tools:listitem="@layout/list_item_news"/>
 
     </FrameLayout>
 </layout>

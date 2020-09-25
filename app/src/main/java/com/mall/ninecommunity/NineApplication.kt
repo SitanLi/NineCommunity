@@ -6,9 +6,14 @@ import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.CrashUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
+import com.mall.baselibrary.loadSir.ErrorCallback
+import com.mall.baselibrary.loadSir.LoadingCallback
 import com.mall.baselibrary.selector.XSelector
 import com.mall.ninecommunity.di.appConfigModule
 import com.mall.ninecommunity.utils.imageload.ImageLoadConfig
+import dagger.hilt.android.HiltAndroidApp
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.x.androidXModule
@@ -18,6 +23,7 @@ import org.kodein.di.android.x.androidXModule
  *@author: Lixiaoping
  *TODO : Application
  */
+@HiltAndroidApp
 class NineApplication : Application(), DIAware {
     override val di: DI by DI.lazy {
         import(androidXModule(this@NineApplication))
@@ -37,6 +43,7 @@ class NineApplication : Application(), DIAware {
         //注册工具
         Utils.init(this)
         initLogUtils()
+        initLoadSir()
         initCrashUtils()
         //初始化dex
         initMultiDex()
@@ -44,6 +51,15 @@ class NineApplication : Application(), DIAware {
         XSelector.init(this)
         //初始化imageLoad图片默认资源
         ImageLoadConfig.instance().initImageResId(R.drawable.icon_user_default, R.drawable.icon_user_default, R.drawable.load_default_image, R.drawable.load_default_image)
+    }
+
+    private fun initLoadSir() {
+        //LoadSir注册
+        LoadSir.beginBuilder()
+                .addCallback(LoadingCallback())//加载
+                .addCallback(ErrorCallback())//错误
+                .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
+                .commit()
     }
 
     private fun initLogUtils() {

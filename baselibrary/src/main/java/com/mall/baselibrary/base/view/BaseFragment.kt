@@ -14,7 +14,7 @@ import com.trello.rxlifecycle3.components.support.RxFragment
 /**
  *@Time :2019/10/30
  *@author: Lixiaoping
- *TODO :Fragment基类：无ViewModel
+ * Fragment基类
  */
 abstract class BaseFragment<DB : ViewDataBinding> : RxFragment() {
     protected var startFragmentTime: Long = 0L

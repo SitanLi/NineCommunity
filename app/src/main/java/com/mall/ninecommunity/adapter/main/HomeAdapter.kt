@@ -24,27 +24,28 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mall.ninecommunity.databinding.ListItemPlantBinding
-import com.mall.ninecommunity.model.main.Plant
+import com.mall.ninecommunity.databinding.ListItemNewsBinding
+import com.mall.ninecommunity.model.TopStoriesBean
 import com.mall.ninecommunity.view.fragment.PagerFragmentDirections
+import javax.inject.Inject
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
-class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
+class HomeAdapter @Inject constructor() : ListAdapter<TopStoriesBean, RecyclerView.ViewHolder>(PlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PlantViewHolder(ListItemPlantBinding.inflate(
+        return HomeViewHolder(ListItemNewsBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val plant = getItem(position)
-        (holder as PlantViewHolder).bind(plant)
+        val topStoriesBean = getItem(position)
+        (holder as HomeViewHolder).bind(topStoriesBean)
     }
 
-    class PlantViewHolder(
-        private val binding: ListItemPlantBinding
+    class HomeViewHolder(
+            private val binding: ListItemNewsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
@@ -55,14 +56,14 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         }
 
         private fun navigateToPlant(
-            plant: Plant,
-            view: View
+                topStoriesBean: TopStoriesBean?,
+                view: View
         ) {
-           val directions = PagerFragmentDirections.actionPagerFragmentToDetailFragment(plant.plantName!!)
+            val directions = PagerFragmentDirections.actionPagerFragmentToWebViewFragment(topStoriesBean?.url?:"")
             view.findNavController().navigate(directions)
         }
 
-        fun bind(item: Plant) {
+        fun bind(item: TopStoriesBean) {
             binding.apply {
                 bean = item
                 executePendingBindings()
@@ -71,14 +72,14 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
     }
 }
 
-private class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
+private class PlantDiffCallback : DiffUtil.ItemCallback<TopStoriesBean>() {
 
-    override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-        return oldItem.plantId == newItem.plantId
+    override fun areItemsTheSame(oldItem: TopStoriesBean, newItem: TopStoriesBean): Boolean {
+        return oldItem.id == newItem.id
     }
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+    override fun areContentsTheSame(oldItem: TopStoriesBean, newItem: TopStoriesBean): Boolean {
         return oldItem == newItem
     }
 }

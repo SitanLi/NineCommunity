@@ -10,4 +10,10 @@
     <color name="public_line_white">#e9ebee</color>
     <color name="public_light_grey_color">#b3bac8</color>
     <color name="public_blue_color">#2862ff</color>
+    <color name="translucent">#00000000</color>
+
+    <color name="exist_bg_color">#FFFFFF</color>
+    <color name="exist_bg_color2">#FFFFFF</color>
+    <color name="exist_title_color">#333333</color>
+    <color name="exist_right_color">#333333</color>
 </resources>

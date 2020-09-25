@@ -8,7 +8,7 @@ import com.mall.baselibrary.base.bean.DialogBean
 import com.trello.rxlifecycle3.LifecycleProvider
 
 /**
- * TODO:ViewModel基类，管理rxJava发出的请求，ViewModel销毁同时也取消请求
+ * ViewModel基类，管理rxJava发出的请求，ViewModel销毁同时也取消请求
  */
 abstract class BaseViewModel (app:Application): AndroidViewModel(app) {
     /**

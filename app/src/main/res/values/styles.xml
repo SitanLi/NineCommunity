@@ -43,5 +43,13 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/font_small_x</item>
     </style>
+<!--    公共返回-->
+    <style name="ExistViewStyle">
+        <item name="exist_background">@color/exist_bg_color</item>
+        <item name="back_view">@mipmap/icon_back_no_bg</item>
+        <item name="title_name_color">@color/exist_title_color</item>
+        <item name="right_name_color">@color/exist_right_color</item>
+    </style>
+
 
 </resources>

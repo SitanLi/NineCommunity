@@ -9,14 +9,14 @@
         android:name="com.mall.ninecommunity.view.fragment.PagerFragment"
         android:label="pager_fragment"
         tools:layout="@layout/fragment_pager">
+
         <action
-            android:id="@+id/action_pagerFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
+            android:id="@+id/action_pagerFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-
     </fragment>
 
     <fragment
@@ -26,6 +26,16 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="plantName"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.mall.ninecommunity.view.fragment.WebViewFragment"
+        android:label="web_view_layout"
+        tools:layout="@layout/web_view_layout">
+        <argument
+            android:name="h5Url"
             app:argType="string" />
     </fragment>
 </navigation>

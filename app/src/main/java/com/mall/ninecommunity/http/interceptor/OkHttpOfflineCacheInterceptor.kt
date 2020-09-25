@@ -3,8 +3,9 @@ package com.mall.ninecommunity.http.interceptor
 import com.blankj.utilcode.util.NetworkUtils
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class OkHttpOfflineCacheInterceptor : Interceptor {
+class OkHttpOfflineCacheInterceptor @Inject constructor(): Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         if (!NetworkUtils.isAvailable()) {

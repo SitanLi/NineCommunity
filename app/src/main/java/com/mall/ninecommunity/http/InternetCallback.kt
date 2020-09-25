@@ -2,58 +2,38 @@ package com.mall.ninecommunity.http
 
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class RxObserver<T> : Observer<T> {
+/**
+ *@createTime :2020/9/25  9:26
+ *@Author:XiaopingLi
+ *@Description :
+ */
+class InternetCallback<T> : Callback<T> {
     private var doError: ((e: Throwable, message: String) -> Unit)? = null
     private var doNull: (() -> Unit)? = null
-    private var doNext: ((t: T) -> Unit?)? = null
+    private var doNext: ((t: T) -> Unit)? = null
+
+    constructor(doNext: ((t: T) -> Unit)?, doError: ((e: Throwable, message: String) -> Unit)?, doNull: (() -> Unit)?) {
+        this.doNext = doNext
+        this.doNull = doNull
+        this.doError = doError
+    }
+
+
+    constructor(doNext: ((t: T) -> Unit)?) {
+        this.doNext = doNext
+    }
 
     var showToast = true
 
-    constructor(doError: ((e: Throwable, message: String) -> Unit)? = null, doNext: ((t: T) -> Unit?)? = null) {
-        this.doError = doError
-        this.doNext = doNext
-    }
-
-    constructor(doNull: (() -> Unit)? = null, doNext: ((t: T) -> Unit?)? = null) {
-        this.doNull = doNull
-        this.doNext = doNext
-    }
-
-    constructor(doNext: ((t: T) -> Unit?)? = null) {
-        this.doNext = doNext
-    }
-
-    constructor(showToast: Boolean) {
-        this.showToast = showToast
-    }
-
-    private var mDisposable: Disposable? = null
-
-    override fun onSubscribe(d: Disposable) {
-        mDisposable = d
-    }
-
-    override fun onComplete() {
-        if (mDisposable != null && !mDisposable!!.isDisposed) {
-            mDisposable!!.dispose()
-        }
-    }
-
-    override fun onNext(t: T) {
-        doNext?.invoke(t)
-    }
-
-    override fun onError(e: Throwable) {
+    override fun onFailure(call: Call<T>, e: Throwable) {
         e.printStackTrace()
-//        if (!NetworkUtils.isConnected()) {
-//            doError("网络不可用...")
-//        } else
         if (e is UnknownHostException) {// 未知主机
             doErrorSwitchHost()
         } else if (e is retrofit2.HttpException) {
@@ -75,12 +55,14 @@ class RxObserver<T> : Observer<T> {
         } else {
             doError("请求失败，请稍后再试...")
         }
-
-        if (mDisposable != null && !mDisposable!!.isDisposed) {
-            mDisposable!!.dispose()
-        }
         doError?.invoke(e, e.message.toString())
         LogUtils.i("Http error --> ${e.message} || ${e.stackTrace}")
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onResponse(call: Call<T>, response: Response<T>) {
+        val t = response.body() as T
+        doNext?.invoke(t)
     }
 
     private fun doErrorSwitchHost() {

@@ -13,13 +13,9 @@ object RequestDomainConfig {
     //测试服
     private var WX_WEB_PAY_REFERER = "https://testh5.wowolive99.com"//微信H5支付域名
     private var URL_DOMAIN = "http://testservice.wowolive99.com"//链接地址
-//    private var URL_REQUEST_DEFAULT = "http://testservice.wowolive99.com/service/"//接口地址
-    private var URL_REQUEST_DEFAULT = "http://testservice.wowolive99.com/cmd/"//接口地址
 
-    //正式服
-    //    public static final String WX_WEB_PAY_REFERER = "https://h5.wowolive99.com";//微信H5支付域名
-    //    public static final String URL_DOMAIN = "https://www.wowolive99.com";//链接地址
-    //    public static final String URL_REQUEST_DEFAULT = "http://service.wowolive99.com/servic/";//接口地址
+    //    private var URL_REQUEST_DEFAULT = "http://testservice.wowolive99.com/service/"//接口地址
+    private var URL_REQUEST_DEFAULT = "http://testservice.wowolive99.com/cmd/"//接口地址
 
     fun getDoMainUrl(): String {
         if (isTestService) {

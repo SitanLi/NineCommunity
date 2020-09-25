@@ -8,13 +8,9 @@ import com.mall.baselibrary.base.dialog.LoadingDialog
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
 /**
- * TODO Activity基类：无ViewModel
+ *  Activity基类
  */
 abstract class BaseActivity<DB : ViewDataBinding> : RxAppCompatActivity() {
-    companion object {
-        const val SYSTEM_DESIGN_HEIGHT = 1334
-    }
-
     protected var startActivityTime: Long = 0L
     protected lateinit var dataBinding: DB
     private val loadingDialog by lazy { LoadingDialog(this, R.style.LoadingDialog) }

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ImageView">
+    <declare-styleable name="ImageView"></declare-styleable>
+
+    <declare-styleable name="PublicExistView">
+        <attr name="exist_background" format="reference|color" />
+        <attr name="back_view" format="reference|color" />
+        <attr name="title_name" format="string" />
+        <attr name="title_name_color" format="reference|color" />
+        <attr name="right_view" format="reference|color" />
+        <attr name="right_name" format="string" />
+        <attr name="right_name_color" format="reference|color" />
+        <attr name="is_show_back" format="boolean" />
+        <attr name="is_navigation" format="boolean" />
     </declare-styleable>
 </resources>

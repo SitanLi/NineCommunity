@@ -21,7 +21,7 @@ class LoadingDialog(context: Context, themeResId: Int) : BaseNoModelDialog<Dialo
      */
     fun setLoadingMsg(msg: String) {
         if (TextUtils.isEmpty(msg)) return
-        binding.tvMsg?.text = msg
+        binding.tvMsg.text = msg
     }
 
 }

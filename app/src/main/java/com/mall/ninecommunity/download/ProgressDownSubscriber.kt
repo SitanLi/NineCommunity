@@ -1,6 +1,7 @@
 package com.mall.ninecommunity.download
 
 import android.os.Handler
+import com.mall.ninecommunity.controller.inter.DownloadController
 import com.mall.ninecommunity.data.dao.DownloadInfoDao
 import com.mall.ninecommunity.download.listener.DownloadProgressListener
 import com.mall.ninecommunity.download.listener.HttpDownOnNextListener

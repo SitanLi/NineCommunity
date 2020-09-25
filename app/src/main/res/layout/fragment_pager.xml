@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="model"
-            type="com.mall.ninecommunity.viewmodels.viewmodel.PagerViewModel" />
+            name="handle"
+            type="com.mall.ninecommunity.view.fragment.PagerFragment.PagerHandle" />
 
     </data>
 
@@ -18,7 +18,7 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
-            app:currentItem="@{model.currentItem}"
+            app:currentItem="@{handle.currentItem}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="7" />

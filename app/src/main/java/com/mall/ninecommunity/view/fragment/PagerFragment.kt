@@ -1,9 +1,10 @@
 package com.mall.ninecommunity.view.fragment
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.viewpager.widget.ViewPager
 import com.mall.baselibrary.base.view.BaseFragment
-import com.mall.baselibrary.base.viewModel.fViewModels
 import com.mall.baselibrary.widget.ResourceUtils
 import com.mall.baselibrary.widget.tablayout.listener.CustomTabEntity
 import com.mall.baselibrary.widget.tablayout.listener.OnTabSelectListener
@@ -12,14 +13,16 @@ import com.mall.ninecommunity.adapter.main.FragmentAdapter
 import com.mall.ninecommunity.databinding.FragmentPagerBinding
 import com.mall.ninecommunity.model.main.TabEntity
 import com.mall.ninecommunity.viewmodels.viewmodel.PagerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass.
  * Use the [PagerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class PagerFragment : BaseFragment<FragmentPagerBinding>(), OnTabSelectListener, ViewPager.OnPageChangeListener {
-    private val pagerViewModel: PagerViewModel by fViewModels()
+    private val pagerViewModel: PagerViewModel by viewModels()
 
     override fun initLayoutId(): Int = R.layout.fragment_pager
 
@@ -38,11 +41,11 @@ class PagerFragment : BaseFragment<FragmentPagerBinding>(), OnTabSelectListener,
     }
 
     override fun initData() {
-        dataBinding.model = pagerViewModel
+        dataBinding.handle = PagerHandle()
     }
 
     override fun onTabSelect(position: Int) {
-        pagerViewModel.currentItem.value = position
+        dataBinding.handle?.currentItem?.value = position
     }
 
     override fun onTabReselect(position: Int) {
@@ -59,5 +62,9 @@ class PagerFragment : BaseFragment<FragmentPagerBinding>(), OnTabSelectListener,
 
     override fun onPageSelected(position: Int) {
         dataBinding.tabLayout.currentTab = position
+    }
+
+    inner class PagerHandle {
+        var currentItem = MutableLiveData<Int>()
     }
 }

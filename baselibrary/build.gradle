@@ -80,4 +80,9 @@ dependencies {
     api rootProject.ext.dependencies.kodein_core
     api rootProject.ext.dependencies.kodein_androidx
 
+    //constraint
+    api rootProject.ext.dependencies.constraint_layout
+    //loadsir
+    api rootProject.ext.dependencies.loadsir
+
 }

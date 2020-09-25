@@ -9,8 +9,8 @@ import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.LogUtils
 import com.mall.baselibrary.base.dialog.BaseNoModelDialog
 import com.mall.ninecommunity.R
+import com.mall.ninecommunity.controller.inter.DownloadController
 import com.mall.ninecommunity.databinding.DialogAppUpdateBinding
-import com.mall.ninecommunity.download.DownloadController
 import com.mall.ninecommunity.download.listener.HttpDownOnNextListener
 import com.mall.ninecommunity.model.DownloadInfo
 import com.mall.ninecommunity.model.VersionBean
@@ -26,9 +26,9 @@ import java.io.File
 /**
  *@Time :2019/11/1
  *@author: Lixiaoping
- *TODO :
+ * 下载更新dialog
  */
-class AppUpdateDialog(context: Context, themeResId: Int, private val versionVo: VersionBean?) : BaseNoModelDialog<DialogAppUpdateBinding>(context, themeResId), DIAware {
+class AppUpdateDialog(context: Context, private var versionVo: VersionBean) : BaseNoModelDialog<DialogAppUpdateBinding>(context, R.style.public_Theme_dialog), DIAware {
     override val di: DI by di()
     private val downloadController: DownloadController by instance()
 
@@ -45,17 +45,8 @@ class AppUpdateDialog(context: Context, themeResId: Int, private val versionVo: 
 
     private fun initUI() {
         binding.update = versionVo
-        binding.app = this
-        if (versionVo?.musted == 1) toDownLoad()
-    }
-
-
-    fun confirm(view: View) {
-        toDownLoad()
-    }
-
-    fun cancel(view: View) {
-        dismiss()
+        binding.noForceUpdateLayout.handle = UpdateHandle()
+        if (versionVo.musted == 1) toDownLoad()
     }
 
     private fun toDownLoad() {
@@ -69,7 +60,7 @@ class AppUpdateDialog(context: Context, themeResId: Int, private val versionVo: 
             }
 
             override fun onComplete(downInfo: DownloadInfo) {
-                val fileName = versionVo?.url?.substring(versionVo.url!!.lastIndexOf("/"))
+                val fileName = versionVo.url?.substring(versionVo.url!!.lastIndexOf("/"))
                 val file = File(PathUnifyUtils.getPictureDir() + fileName)
                 AppUtils.installApp(file)
                 dismiss()
@@ -82,13 +73,23 @@ class AppUpdateDialog(context: Context, themeResId: Int, private val versionVo: 
             }
         }
         GlobalScope.launch {
-            downloadController.startDownload(versionVo?.url ?: "", listener)
+            downloadController.startDownload(versionVo.url ?: "", listener)
         }
     }
 
     override fun onBackPressed() {
-        if (versionVo?.musted != 1)
+        if (versionVo.musted != 1)
             super.onBackPressed()
+    }
+
+    inner class UpdateHandle {
+        fun confirm() {
+            toDownLoad()
+        }
+
+        fun cancel(view: View) {
+            dismiss()
+        }
     }
 
 }

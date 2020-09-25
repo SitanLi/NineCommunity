@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+<variable
+    name="handle"
+    type="com.mall.ninecommunity.view.fragment.WebViewFragment.WebHandle" />
+</data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.mall.ninecommunity.widget.PublicExistView
+            android:id="@+id/exit_view"
+            style="@style/ExistViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:is_navigation="true"
+            app:title_name="Details" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.mall.baselibrary.widget.LollipopFixedWebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                fullProgressGone="@{handle.progress}"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:progressDrawable="@drawable/web_view_progress_bar" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</layout>
