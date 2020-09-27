@@ -35,12 +35,4 @@ object RequestDomainConfig {
         return WX_WEB_PAY_REFERER
     }
 
-    fun getRequestDefault(): String {
-        if (isTestService) {
-            URL_REQUEST_DEFAULT = "https://news-at.zhihu.com/api/4/"
-        } else {
-            URL_REQUEST_DEFAULT = "https://news-at.zhihu.com/api/4/"
-        }
-        return URL_REQUEST_DEFAULT
-    }
 }

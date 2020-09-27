@@ -1,9 +1,11 @@
-package com.mall.ninecommunity
+package com.mall.ninecommunity.view.activity
 
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.blankj.utilcode.util.LogUtils
 import com.mall.baselibrary.base.view.BaseActivity
+import com.mall.ninecommunity.BuildConfig
+import com.mall.ninecommunity.R
 import com.mall.ninecommunity.databinding.ActivityMainBinding
 import com.mall.ninecommunity.dialog.AppUpdateDialog
 import com.mall.ninecommunity.viewmodels.viewmodel.DownloadViewModel
@@ -27,7 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initData() {
         downloadViewModel.initData()
         downloadViewModel.versionBean.observe(this, Observer {
-//            if (BuildConfig.DEBUG)return@Observer
+            if (BuildConfig.DEBUG) return@Observer
             AppUpdateDialog(this, it).show()
         })
     }
