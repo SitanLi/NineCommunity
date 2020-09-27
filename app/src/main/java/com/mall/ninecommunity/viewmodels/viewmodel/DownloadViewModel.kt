@@ -1,5 +1,6 @@
 package com.mall.ninecommunity.viewmodels.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.Utils
@@ -12,7 +13,7 @@ import com.mall.ninecommunity.model.VersionBean
  *@Author:XiaopingLi
  *@Description :
  */
-class DownloadViewModel internal constructor(private val repository: DownloadRepository) : AndroidViewModel(Utils.getApp()) {
+class DownloadViewModel @ViewModelInject constructor(private val repository: DownloadRepository) : AndroidViewModel(Utils.getApp()) {
     var versionBean = MutableLiveData<VersionBean>()
     suspend fun getDownInfo(url: String): DownloadInfo? = repository.queryDownloadInfoByPath(url)
     suspend fun addDownInfo(downloadInfo: DownloadInfo) = repository.insertOrUpdate(downloadInfo)

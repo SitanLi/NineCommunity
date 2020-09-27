@@ -6,13 +6,12 @@ import com.blankj.utilcode.util.LogUtils
 import com.mall.baselibrary.base.view.BaseActivity
 import com.mall.ninecommunity.databinding.ActivityMainBinding
 import com.mall.ninecommunity.dialog.AppUpdateDialog
-import com.mall.ninecommunity.utils.InjectorUtils
 import com.mall.ninecommunity.viewmodels.viewmodel.DownloadViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    private val downloadViewModel: DownloadViewModel by viewModels { InjectorUtils.provideDownloadViewModelFactory() }
+    private val downloadViewModel: DownloadViewModel by viewModels()
 
     companion object {
         private var TAG = MainActivity::class.java.simpleName

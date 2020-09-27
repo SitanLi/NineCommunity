@@ -1,20 +1,18 @@
 package com.mall.ninecommunity.data.repository
 
 import com.mall.ninecommunity.data.dao.DownloadInfoDao
-import com.mall.ninecommunity.di.di
 import com.mall.ninecommunity.model.DownloadInfo
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.instance
+import javax.inject.Inject
 
 /**
  *@createTime :2020/9/21  11:12
  *@Author:XiaopingLi
  *@Description :下载
  */
-class DownloadRepository private constructor():DIAware {
-    override val di: DI  = di()
-    private val downloadInfoDao:DownloadInfoDao by  instance()
+class DownloadRepository @Inject constructor() {
+    @Inject
+    lateinit var downloadInfoDao: DownloadInfoDao
+
     companion object {
         @Volatile
         private var instance: DownloadRepository? = null
