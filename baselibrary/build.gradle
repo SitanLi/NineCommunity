@@ -29,10 +29,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api rootProject.ext.dependencies.kotlin_stdlib_jdk7
     api rootProject.ext.dependencies.appcompat
     //retrofit2
@@ -80,5 +76,7 @@ dependencies {
     api rootProject.ext.dependencies.constraint_layout
     //loadsir
     api rootProject.ext.dependencies.loadsir
+    //multidex
+    api rootProject.ext.dependencies.androidx_multidex
 
 }

@@ -13,12 +13,47 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
         multiDexEnabled true
     }
+
+    signingConfigs {
+        official {
+            storeFile file("nine_community.keystore")
+            storePassword "jiujun9shows"
+            keyAlias "nine_community"
+            keyPassword "jiujun9shows"
+        }
+    }
+
+    productFlavors {
+
+        //(官方包)包名：com.mall.ninecommunity  签名：9a52de3e5c50d2e5d1375a41d00b6f24  签名文件：nine_community.keystore
+        product_official {
+            signingConfig signingConfigs.official
+            applicationId "com.mall.ninecommunity"
+            manifestPlaceholders = [package_name      : "com.mall.ninecommunity",
+                                    CHANNEL_VALUE     : "official",
+                                    UMENG_APPKEY_VALUE: "5e4678e5cb23d271b50003e5",
+                                    TENCENT_VALUE     : "1110040249",
+                                    WX_VALUE          : "wx04ce88dd34b158bd",
+                                    ShareTrace        : "d03b10152cb7fc1d"]
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            //混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+
+            // 移除无用的resource文件
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
         }
     }
 
@@ -37,20 +72,26 @@ android {
     }
 }
 
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        def apkName = "jiujun_${variant.flavorName}"
+        def fileName = "${variant.buildType.getName()}_${apkName}_${variant.versionName}.apk"
+        outputFileName = fileName
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
-    testImplementation 'junit:junit:4.13'
-    kapt "androidx.room:room-compiler:2.2.5"
+    implementation rootProject.ext.dependencies.legacy_support
+    testImplementation rootProject.ext.dependencies.junit
+    kapt rootProject.ext.dependencies.room_compiler
     //hilt
-    implementation "com.google.dagger:hilt-android:2.28-alpha"
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
-    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
-    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+    implementation rootProject.ext.dependencies.hilt_android
+    implementation rootProject.ext.dependencies.hilt_lifecycle
+    kapt rootProject.ext.dependencies.hilt_android_compiler
+    kapt rootProject.ext.dependencies.hilt_compiler
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation rootProject.ext.dependencies.test
+    androidTestImplementation rootProject.ext.dependencies.test_espresso
     implementation project(':baselibrary')
 }

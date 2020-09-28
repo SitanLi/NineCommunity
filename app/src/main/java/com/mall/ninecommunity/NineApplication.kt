@@ -1,7 +1,6 @@
 package com.mall.ninecommunity
 
-import android.app.Application
-import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.CrashUtils
 import com.blankj.utilcode.util.LogUtils
@@ -20,7 +19,7 @@ import dagger.hilt.android.HiltAndroidApp
  *TODO : Application
  */
 @HiltAndroidApp
-class NineApplication : Application() {
+class NineApplication : MultiDexApplication() {
 
     companion object {
         private var instance: NineApplication? = null
@@ -37,8 +36,6 @@ class NineApplication : Application() {
         initLogUtils()
         initLoadSir()
         initCrashUtils()
-        //初始化dex
-        initMultiDex()
         //初始化颜色背景选择器
         XSelector.init(this)
         //初始化imageLoad图片默认资源
@@ -63,11 +60,6 @@ class NineApplication : Application() {
         CrashUtils.init { _, _ ->
             AppUtils.relaunchApp()
         }
-    }
-
-
-    private fun initMultiDex() {
-        MultiDex.install(this)
     }
 
 }
