@@ -6,10 +6,10 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
+import androidx.annotation.*
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.*
 import com.mall.baselibrary.selector.XSelector
 import com.mall.baselibrary.selector.XSelectorHelper
 import com.mall.baselibrary.selector.XSelectorHelper.dip2px
@@ -133,10 +133,8 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
 
     /**
      *设置默认背景颜色
-     * @param tmpColor R.color.red
      */
-    fun defaultBgColor(@ColorRes tmpColor: Int): ShapeSelector {
-        val color = XSelectorHelper.getColorRes(tmpColor)
+    fun defaultBgColor(@ColorInt color: Int): ShapeSelector {
         mDefaultBgColor = color
         isBackgroundColor = true
         if (!hasSetDisabledBgColor)
@@ -172,8 +170,8 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
     /**
      * 设置不可点击颜色
      */
-    fun disabledBgColor(@ColorRes color: Int): ShapeSelector {
-        mDisabledBgColor = XSelectorHelper.getColorRes(color)
+    fun disabledBgColor(@ColorInt color: Int): ShapeSelector {
+        mDisabledBgColor = color
         hasSetDisabledBgColor = true
         isBackgroundColor = true
         return this
@@ -189,8 +187,8 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
     /**
      * 设置手指抬起时颜色
      */
-    fun pressedBgColor(@ColorRes color: Int): ShapeSelector {
-        mPressedBgColor = XSelectorHelper.getColorRes(color)
+    fun pressedBgColor(@ColorInt color: Int): ShapeSelector {
+        mPressedBgColor = color
         hasSetPressedBgColor = true
         isBackgroundColor = true
         return this
@@ -248,8 +246,7 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
     /**
      * 设置绘制边框颜色
      */
-    fun defaultStrokeColor(@ColorRes tmpColor: Int): ShapeSelector {
-        val color = XSelectorHelper.getColorRes(tmpColor)
+    fun defaultStrokeColor(@ColorInt color: Int): ShapeSelector {
         mDefaultStrokeColor = color
         isLine = true
         if (!hasSetDisabledStrokeColor)
@@ -380,11 +377,11 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
      * @param startColor 渐变开始端颜色 例：R.color.colorPrimary
      * @param endColor   渐变结束端颜色 例：R.color.colorPrimary
      */
-    fun gradient(@ColorRes startColor: Int, @ColorRes endColor: Int): ShapeSelector {
+    fun gradient(@ColorInt startColor: Int, @ColorInt endColor: Int): ShapeSelector {
         this.isGradient = true
         this.gradientColors = IntArray(2)
-        this.gradientColors!![0] = XSelectorHelper.getColorRes(startColor)
-        this.gradientColors!![1] = XSelectorHelper.getColorRes(endColor)
+        this.gradientColors!![0] = startColor
+        this.gradientColors!![1] = endColor
         this.gradientType = GradientDrawable.LINEAR_GRADIENT
         this.gradientOrientation = TOP_BOTTOM
         return this
@@ -400,14 +397,14 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
         return this
     }
 
-    fun gradientLinear(@ColorRes vararg gradientColorsResId: Int): ShapeSelector {
+    fun gradientLinear(@ColorInt vararg gradientColorsResId: Int): ShapeSelector {
         this.isGradient = true
         this.gradientType = GradientDrawable.LINEAR_GRADIENT
-        this.gradientOrientation = TOP_BOTTOM
+        this.gradientOrientation = LEFT_RIGHT
         if (gradientColorsResId.size > 1) {
             this.gradientColors = IntArray(gradientColorsResId.size)
             for (i in gradientColorsResId.indices) {
-                this.gradientColors!![i] = XSelectorHelper.getColorRes(gradientColorsResId[i])
+                this.gradientColors!![i] = gradientColorsResId[i]
             }
         } else {
             throw ExceptionInInitializerError("渐变颜色数组至少需要两个颜色")
@@ -415,20 +412,20 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
         return this
     }
 
-    fun gradientLinear(vararg gradientColorsResId: String): ShapeSelector {
-        this.isGradient = true
-        this.gradientType = GradientDrawable.LINEAR_GRADIENT
-        this.gradientOrientation = TOP_BOTTOM
-        if (gradientColorsResId.size > 1) {
-            this.gradientColors = IntArray(gradientColorsResId.size)
-            for (i in gradientColorsResId.indices) {
-                this.gradientColors!![i] = Color.parseColor(gradientColorsResId[i])
-            }
-        } else {
-            throw ExceptionInInitializerError("渐变颜色数组至少需要两个颜色")
-        }
-        return this
-    }
+//    fun gradientLinear(vararg gradientColorsResId: String): ShapeSelector {
+//        this.isGradient = true
+//        this.gradientType = GradientDrawable.LINEAR_GRADIENT
+//        this.gradientOrientation = TOP_BOTTOM
+//        if (gradientColorsResId.size > 1) {
+//            this.gradientColors = IntArray(gradientColorsResId.size)
+//            for (i in gradientColorsResId.indices) {
+//                this.gradientColors!![i] = Color.parseColor(gradientColorsResId[i])
+//            }
+//        } else {
+//            throw ExceptionInInitializerError("渐变颜色数组至少需要两个颜色")
+//        }
+//        return this
+//    }
 
     /**
      * 线性渐变样式
@@ -596,7 +593,7 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
      * @param pressedColorResId 触摸颜色 例：R.color.colorPrimary
      * @param normalColorResId  正常颜色 例：R.color.colorPrimary
      */
-    fun selectorColor(@ColorRes pressedColorResId: Int, @ColorRes normalColorResId: Int): ShapeSelector {
+    fun pressColor(@ColorRes pressedColorResId: Int, @ColorRes normalColorResId: Int): ShapeSelector {
         mColorStateList = ColorSelector.getInstance()
                 .pressedColor(pressedColorResId)
                 .defaultColor(normalColorResId)
@@ -611,10 +608,19 @@ class ShapeSelector private constructor() : ISelectorUtil<Drawable, View> {
      * @param pressedColor 触摸颜色 例：#ffffff
      * @param normalColor  正常颜色 例：#ffffff
      */
-    fun selectorColor(pressedColor: String, normalColor: String): ShapeSelector {
+    fun pressColor(pressedColor: String, normalColor: String): ShapeSelector {
         mColorStateList = ColorSelector.getInstance()
                 .pressedColor(pressedColor)
                 .defaultColor(normalColor)
+                .build()
+        this.isSelectorColor = true
+        return this
+    }
+
+    fun selectorColor(@ColorInt pressedColorResId: Int, @ColorInt normalColorResId: Int): ShapeSelector {
+        mColorStateList = ColorSelector.getInstance()
+                .selectedColor(pressedColorResId)
+                .defaultColor(normalColorResId)
                 .build()
         this.isSelectorColor = true
         return this

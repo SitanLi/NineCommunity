@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="handlers"
+            type="com.mall.ninecommunity.view.fragment.LoginByCodeFragment.LoginByCodeHandle" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:gravity="center_horizontal">
+
+        <com.mall.ninecommunity.widget.PublicExistView
+            android:id="@+id/exist_back"
+            style="@style/ExistViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:is_navigation="true"
+            app:title_name="验证码登录" />
+
+        <LinearLayout
+            android:id="@+id/verification_code_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exist_back"
+            android:layout_marginTop="215dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                xRadius="@{45f}"
+                xStrokeColor="@{@color/c_bfbfbf}"
+                xStrokeWidth="@{1}"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="47.5dp"
+                android:layout_marginRight="47.5dp">
+
+                <com.mall.ninecommunity.widget.SearchEditText
+                    android:id="@+id/search_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/login_phone_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/c_333333"
+                    android:textColorHint="@color/c_bfbfbf"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                xRadius="@{45f}"
+                xStrokeColor="@{@color/c_bfbfbf}"
+                xStrokeWidth="@{1}"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="47.5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="47.5dp">
+
+                <com.mall.ninecommunity.widget.SearchEditText
+                    android:id="@+id/search_edit2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toStartOf="@id/line"
+                    android:layout_toLeftOf="@id/line"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/login_verification_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textColor="@color/c_333333"
+                    android:textColorHint="@color/c_666666"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="1dp"
+                    android:layout_height="14dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/verification_code"
+                    android:layout_toLeftOf="@id/verification_code"
+                    android:background="@color/c_bfbfbf" />
+
+                <TextView
+                    android:id="@+id/verification_code"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:onClick="@{()->handlers.requestCode()}"
+                    android:text="@string/verification_code"
+                    android:textColor="@color/c_bfbfbf"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/login"
+                xGradientEnd="@{@color/c_ff0030}"
+                xGradientStart="@{@color/c_ff0030}"
+                xRadius="@{45f}"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="47.5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="47.5dp"
+                android:gravity="center"
+                android:onClick="@{handlers::loginByCode}"
+                android:text="@string/login_tv_tips"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="44dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="44dp">
+
+                <TextView
+                    android:id="@+id/login_phone_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.5dp"
+                    android:onClick="@{handlers::intentLoginByPwd}"
+                    android:text="@string/login_pwd"
+                    android:textColor="@color/c_78A9F6"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/login_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="28dp"
+            android:clickable="true"
+            android:drawableStart="@drawable/check_box_tv"
+            android:drawableLeft="@drawable/check_box_tv"
+            android:drawablePadding="3dp"
+            android:focusable="true"
+            android:onClick="@{handlers::changeLoginTipStates}"
+            android:textColor="@color/c_999999"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+
+</layout>

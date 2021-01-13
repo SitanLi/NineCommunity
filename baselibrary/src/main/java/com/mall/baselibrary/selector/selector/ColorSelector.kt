@@ -3,18 +3,13 @@ package com.mall.baselibrary.selector.selector
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import android.widget.TextView
 import com.mall.baselibrary.selector.XSelector
 import com.mall.baselibrary.selector.XSelectorHelper
 import com.mall.baselibrary.selector.inter.ISelectorUtil
 
-/**
-
- * @Author Administrator
- * @Date 2019/10/21-11:54
- * @TODO
- */
 class ColorSelector private constructor() : ISelectorUtil<ColorStateList, TextView> {
     companion object {
         const val TEXT_COLOR = 1
@@ -41,17 +36,16 @@ class ColorSelector private constructor() : ISelectorUtil<ColorStateList, TextVi
     private var hasSetSelectedColor = false
     private var hasSetFocusedColor = false
 
-    fun defaultColor(@ColorRes tmpColor: Int): ColorSelector {
-        val color = XSelectorHelper.getColorRes(tmpColor)
-        normalColor = color
+    fun defaultColor(@ColorInt tmpColor: Int): ColorSelector {
+        normalColor = tmpColor
         if (!hasSetDisabledColor)
-            disabledColor = color
+            disabledColor = tmpColor
         if (!hasSetPressedColor)
-            pressedColor = color
+            pressedColor = tmpColor
         if (!hasSetSelectedColor)
-            selectedColor = color
+            selectedColor = tmpColor
         if (!hasSetFocusedColor)
-            focusedColor = color
+            focusedColor = tmpColor
         return this
     }
 
@@ -93,8 +87,8 @@ class ColorSelector private constructor() : ISelectorUtil<ColorStateList, TextVi
         return this
     }
 
-    fun selectedColor(@ColorRes color: Int): ColorSelector {
-        selectedColor = XSelectorHelper.getColorRes(color)
+    fun selectedColor(@ColorInt color: Int): ColorSelector {
+        selectedColor = color
         hasSetSelectedColor = true
         return this
     }

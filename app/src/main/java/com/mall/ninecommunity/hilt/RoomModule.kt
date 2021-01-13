@@ -2,7 +2,9 @@ package com.mall.ninecommunity.hilt
 
 import android.content.Context
 import com.mall.ninecommunity.controller.iml.DownloadControllerIml
+import com.mall.ninecommunity.controller.iml.UserInfoControllerIml
 import com.mall.ninecommunity.controller.inter.DownloadController
+import com.mall.ninecommunity.controller.inter.UserInfoController
 import com.mall.ninecommunity.data.AppDataBase
 import com.mall.ninecommunity.data.dao.DownloadInfoDao
 import dagger.Binds
@@ -31,9 +33,3 @@ object RoomModule {
 
 }
 
-@Module
-@InstallIn(ApplicationComponent::class)
-abstract class ControllerModule {
-    @Binds
-    abstract fun getDownloadController(downloadControllerIml: DownloadControllerIml): DownloadController
-}

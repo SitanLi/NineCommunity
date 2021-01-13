@@ -1,6 +1,7 @@
 package com.mall.ninecommunity.hilt
 
 import com.mall.ninecommunity.controller.inter.DownloadController
+import com.mall.ninecommunity.controller.inter.UserInfoController
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
@@ -14,4 +15,5 @@ import dagger.hilt.android.components.ApplicationComponent
 @InstallIn(ApplicationComponent::class)
 interface ControllerEntryPoint {
     fun downloadController(): DownloadController
+    fun userInfoController(): UserInfoController
 }

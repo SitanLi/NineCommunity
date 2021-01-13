@@ -1,15 +1,25 @@
 package com.mall.ninecommunity.http.interceptor
 
+import android.util.Log
+import com.blankj.utilcode.util.GsonUtils
+import com.blankj.utilcode.util.JsonUtils
 import com.blankj.utilcode.util.LogUtils
+import com.google.gson.JsonObject
 import okhttp3.Interceptor
 import okhttp3.Response
+import org.json.JSONObject
 import java.nio.charset.Charset
 import javax.inject.Inject
 
 class OkHttpClientLogInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        LogUtils.d("OkHttpClientRequest=${request.url()}")
+        val headers = request.headers()
+        val headMap = HashMap<String,String>()
+        repeat(headers.size()){
+            headMap[headers.name(it)] = headers.value(it)
+        }
+        LogUtils.json("OkHttpClientRequest=${request.url()}",headMap)
         val time = System.currentTimeMillis()
         val response = chain.proceed(request)
         val charset = response.body()?.contentType()?.charset()

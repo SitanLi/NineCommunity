@@ -2,20 +2,14 @@ package com.mall.baselibrary.selector.selector
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringDef
+import android.widget.TextView
 import com.mall.baselibrary.selector.XSelector
 import com.mall.baselibrary.selector.XSelectorHelper.dip2px
 import com.mall.baselibrary.selector.inter.ISelectorUtil
 
-/**
-
- * @Author Administrator
- * @Date 2019/10/21-16:33
- * @TODO
- */
 class CompoundDrawableSelector private constructor() : ISelectorUtil<Drawable, TextView> {
     companion object {
         const val LEFT = "LEFT"

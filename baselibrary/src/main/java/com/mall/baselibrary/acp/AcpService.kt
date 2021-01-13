@@ -9,11 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.blankj.utilcode.util.LogUtils
 
-/**
- *@Time :2019/11/4
- *@author: Lixiaoping
- *TODO :
- */
 object AcpService {
     /**
      * 检查权限授权状态

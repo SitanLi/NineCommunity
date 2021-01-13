@@ -17,4 +17,8 @@ object Constants {
     object MemoryKey {
         const val CONFIG_URL = "urlConfig"//用于保存URL的MAP
     }
+
+    object CacheKey {
+        const val USER_INFO = "userInfo"
+    }
 }

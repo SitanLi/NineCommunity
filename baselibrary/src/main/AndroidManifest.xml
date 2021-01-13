@@ -6,10 +6,5 @@
             android:name=".acp.AcpActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.Transparent" />
-
-        <activity
-            android:name=".pic.PicActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.Transparent" />
     </application>
 </manifest>

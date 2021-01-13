@@ -2,14 +2,9 @@ package com.mall.baselibrary.acp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import android.view.WindowManager
 
-/**
- *@Time :2019/11/4
- *@author: Lixiaoping
- *TODO :
- */
 class AcpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

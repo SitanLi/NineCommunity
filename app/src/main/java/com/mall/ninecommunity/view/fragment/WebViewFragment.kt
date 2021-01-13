@@ -50,7 +50,7 @@ class WebViewFragment : BaseLazyFragment<WebViewLayoutBinding>() {
         initWebView()
     }
 
-    @SuppressLint("JavascriptInterface", "SetJavaScriptEnabled")
+    @SuppressLint("JavascriptInterface", "SetJavaScriptEnabled", "AddJavascriptInterface")
     private fun initWebView() {
         url = arguments?.getString(Constants.Action.H5_URL)
         if (url.isNullOrEmpty()) return
@@ -81,7 +81,7 @@ class WebViewFragment : BaseLazyFragment<WebViewLayoutBinding>() {
         webView.removeJavascriptInterface("accessibility")
         webView.removeJavascriptInterface("accessibilityTraversal")
         loadServer = webView.registerLoadSir {
-            dataBinding?.webView?.loadUrl(url)
+            dataBinding.webView.loadUrl(url)
         }
         myWebViewClient = MyWebViewClient(loadServer)
         webView.webViewClient = myWebViewClient

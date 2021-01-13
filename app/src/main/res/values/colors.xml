@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#F6F6F6</color>
+    <color name="colorPrimaryDark">#F8F8F8</color>
     <color name="colorAccent">#D81B60</color>
     <color name="lightGrey">#D3D3D3</color>
     <color name="white">#FFFFFF</color>
@@ -11,6 +11,15 @@
     <color name="public_light_grey_color">#b3bac8</color>
     <color name="public_blue_color">#2862ff</color>
     <color name="translucent">#00000000</color>
+
+    <color name="c_111111">#111111</color>
+    <color name="c_333333">#333333</color>
+    <color name="c_666666">#666666</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_bfbfbf">#BFBFBF</color>
+    <color name="c_b6b6b6">#b6b6b6</color>
+    <color name="c_78A9F6">#78A9F6</color>
+    <color name="c_ff0030">#ff0030</color>
 
     <color name="exist_bg_color">#FFFFFF</color>
     <color name="exist_bg_color2">#FFFFFF</color>

@@ -6,21 +6,15 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import com.mall.baselibrary.selector.XSelector
 import com.mall.baselibrary.selector.XSelectorHelper
 import com.mall.baselibrary.selector.inter.ISelectorUtil
 
-/**
-
- * @Author Administrator
- * @Date 2019/10/21-11:58
- * @TODO
- */
 class DrawableSelector private constructor() : ISelectorUtil<Drawable, View> {
 
     companion object {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/pagerFragment">
+
     <fragment
         android:id="@+id/pagerFragment"
         android:name="com.mall.ninecommunity.view.fragment.PagerFragment"
@@ -17,16 +18,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.mall.ninecommunity.view.fragment.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail">
-        <argument
-            android:name="plantName"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_pagerFragment_to_nav_login"
+            app:destination="@id/nav_login"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -38,4 +36,8 @@
             android:name="h5Url"
             app:argType="string" />
     </fragment>
+
+    <include app:graph="@navigation/nav_login" />
+
+
 </navigation>

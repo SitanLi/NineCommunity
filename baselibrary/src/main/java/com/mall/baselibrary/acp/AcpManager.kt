@@ -13,11 +13,6 @@ import android.provider.Settings
 import com.blankj.utilcode.util.LogUtils
 import java.util.*
 
-/**
- *@Time :2019/11/4
- *@author: Lixiaoping
- *TODO :
- */
 class AcpManager {
 
     companion object {
@@ -267,6 +262,7 @@ class AcpManager {
      * 摧毁本库的 AcpActivity
      */
     private fun onDestroy(activity: Activity?) {
+        callback = null
         activity?.finish()
     }
 }

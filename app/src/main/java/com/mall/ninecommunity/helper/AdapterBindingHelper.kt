@@ -13,7 +13,8 @@ import com.mall.ninecommunity.utils.imageload.setImageRadiusUrl
 object AdapterBindingHelper {
     @BindingAdapter(value = ["imageUrl", "imageType","radius"], requireAll = false)
     @JvmStatic
-    fun loadImage(imageView: ImageView, url: String, imageType: Enum<ImageViewEnum>?,radius:Int) {
+    fun loadImage(imageView: ImageView, url: String?, imageType: Enum<ImageViewEnum>?,radius:Int) {
+        if (url.isNullOrEmpty())return
         if (imageType == ImageViewEnum.CIRCLE) imageView.setImageCircleUrl(url) else imageView.setImageRadiusUrl(url,radius)
     }
 

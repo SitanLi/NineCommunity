@@ -3,9 +3,10 @@ package com.mall.ninecommunity.hilt
 import com.blankj.utilcode.util.PathUtils
 import com.mall.ninecommunity.BuildConfig
 import com.mall.ninecommunity.http.api.ApiService
+import com.mall.ninecommunity.http.api.ApiUserService
 import com.mall.ninecommunity.http.interceptor.OkHttpClientLogInterceptor
+import com.mall.ninecommunity.http.interceptor.OkHttpHeadPublicParamsInterceptor
 import com.mall.ninecommunity.http.interceptor.OkHttpNetCacheInterceptor
-import com.mall.ninecommunity.http.interceptor.OkHttpOfflineCacheInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,18 +32,18 @@ object InternetModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(okHttpNetCacheInterceptor: OkHttpNetCacheInterceptor,
-                            okHttpClientLogInterceptor: OkHttpClientLogInterceptor,
-                            okHttpOfflineCacheInterceptor: OkHttpOfflineCacheInterceptor): OkHttpClient {
+                            okHttpHeadPublicParamsInterceptor: OkHttpHeadPublicParamsInterceptor,
+                            okHttpClientLogInterceptor: OkHttpClientLogInterceptor): OkHttpClient {
         val httpClientBuild = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG)
-            httpClientBuild.addInterceptor(okHttpClientLogInterceptor)
         val cacheSize = 10 * 1024 * 1024L//10MB
         val cache = Cache(File(PathUtils.getInternalAppCachePath()), cacheSize)
         httpClientBuild.addNetworkInterceptor(okHttpNetCacheInterceptor)
-                .addInterceptor(okHttpOfflineCacheInterceptor)
+                .addInterceptor(okHttpHeadPublicParamsInterceptor)
                 .cache(cache)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
+        if (BuildConfig.DEBUG)
+            httpClientBuild.addInterceptor(okHttpClientLogInterceptor)
         return httpClientBuild.build()
     }
 
@@ -64,4 +65,6 @@ object InternetModule {
     @Provides
     fun provideService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
+    @Provides
+    fun provideUserService(retrofit: Retrofit):ApiUserService  = retrofit.create(ApiUserService::class.java)
 }

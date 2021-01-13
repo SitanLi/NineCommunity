@@ -4,26 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
-
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.mall.baselibrary.ext.scanFile
+import java.io.File
 
-/**
- * @Author Administrator
- * @Date 2019/10/17-17:27
- * @TODO
- */
 class PicManager {
     companion object {
         const val TAG = "PicManager"
-        const val REQUEST_TYPE = "requestType"
         const val REQUEST_CODE_CAMERA = 1009//拍照
         const val REQUEST_CODE_PICTURE = 1008//相册
         const val REQUEST_CODE_CUT_PIC = 1007//裁剪
@@ -43,54 +36,29 @@ class PicManager {
     }
 
     fun takeCamera(context: Context) {
-        startPicActivity(context, REQUEST_CODE_CAMERA)
+        behavior(context as Activity, REQUEST_CODE_CAMERA)
     }
 
     fun takePhotoAlbum(context: Context) {
-        startPicActivity(context, REQUEST_CODE_PICTURE)
+        behavior(context as Activity, REQUEST_CODE_PICTURE)
     }
 
-
-    private fun startPicActivity(context: Context, type: Int) {
-        val intent = Intent(context, PicActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra(REQUEST_TYPE, type)
-        context.startActivity(intent)
-    }
-
-    fun behavior(activity: Activity, intent: Intent?, savedInstanceState: Bundle?) {
-        if (intent == null) {
-            LogUtils.eTag(TAG, "behavior intent is null")
-            onDestroy(activity)
-            return
-        }
-        if (intent.extras == null) {
-            LogUtils.eTag(TAG, "behavior extras is null")
-            onDestroy(activity)
-            return
-        }
-        if (savedInstanceState == null) {
-            val requestType = intent.extras?.getInt(REQUEST_TYPE)
-            if (requestType == REQUEST_CODE_CAMERA) {
-                executeCamera(activity)
-            } else if (requestType == REQUEST_CODE_PICTURE) {
-                executePhotoAlbum(activity)
-            }
+    private fun behavior(activity: Activity, type: Int) {
+        if (type == REQUEST_CODE_CAMERA) {
+            executeCamera(activity)
+        } else if (type == REQUEST_CODE_PICTURE) {
+            executePhotoAlbum(activity)
         }
     }
 
     private fun executeCamera(context: Activity) {
-        var providerAuthority = context.packageName + ".FileProvider"
-        if (!builder?.providerAuthority.isNullOrEmpty()) {
-            providerAuthority = builder?.providerAuthority!!
-        }
-
-        val imageUri: Uri
+        val imageUri: Uri?
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         // 判断版本大于等于7.0
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             imageUri = try {
-                FileProvider.getUriForFile(context, providerAuthority, builder?.cacheFile!!)
+                val authProvider = AppUtils.getAppPackageName() + ".FileProvider"
+                builder?.cacheFile?.let { FileProvider.getUriForFile(context, authProvider, it) }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Uri.fromFile(builder?.cacheFile)
@@ -100,6 +68,10 @@ class PicManager {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {
             imageUri = Uri.fromFile(builder?.cacheFile)
+        }
+        if (imageUri == null) {
+            ToastUtils.showShort("获取uri为空")
+            return
         }
         // 指定调用相机拍照后照片的储存路径
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
@@ -135,7 +107,8 @@ class PicManager {
         intent.putExtra("return-data", false)
 
         // intent.putExtra(MediaStore.EXTRA_OUTPUT,
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(builder?.cacheFile))
+        val cacheFile = builder?.cacheFile ?: return
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cacheFile))
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
         intent.putExtra("noFaceDetection", true) // no face detection
 
@@ -146,25 +119,24 @@ class PicManager {
     fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, intent: Intent?) {
         if (listener == null || requestCode != REQUEST_CODE_CAMERA && requestCode != REQUEST_CODE_PICTURE && requestCode != REQUEST_CODE_CUT_PIC) {
             LogUtils.eTag(TAG, "onActivityResult Unknown requestCode or listener is null")
-            onDestroy(activity)
             return
         }
         if (resultCode != Activity.RESULT_OK) {
             LogUtils.eTag(TAG, "onActivityResult--cancel--resultCode", resultCode)
-            onDestroy(activity)
             return
         }
         when (requestCode) {
             REQUEST_CODE_CAMERA -> {
                 LogUtils.iTag(TAG, "onActivityResult camera")
-                builder?.cacheFile?.absolutePath?.let { scanFile(activity, it, builder?.isCrop!!) }
+                builder?.cacheFile?.let {
+                    scanFile(activity, it, builder?.isCrop!!)
+                }
             }
             REQUEST_CODE_PICTURE -> {
 
                 if (intent == null || intent.data == null) {
                     LogUtils.eTag(TAG, "onActivityResult picture data is null ")
                     listener?.onTakePicFail()
-                    onDestroy(activity)
                     return
                 }
                 LogUtils.iTag(TAG, "onActivityResult picture")
@@ -173,34 +145,24 @@ class PicManager {
                 } else {
                     LogUtils.iTag(TAG, "onActivityResult picture callback uri：%s", intent.data)
                     listener?.onTakePicSuccess(intent.data!!)
-                    onDestroy(activity)
+//                    onDestroy(activity)
                 }
             }
             REQUEST_CODE_CUT_PIC -> {
                 LogUtils.iTag(TAG, "onActivityResult crop")
-                scanFile(activity, builder?.cacheFile!!.absolutePath, false)
+                builder?.cacheFile?.let { scanFile(activity, it, false) }
             }
         }
     }
 
-    private fun scanFile(activity: Activity, path: String, isCrop: Boolean) {
-        MediaScannerConnection.scanFile(activity, arrayOf(path), arrayOf("image/jpeg")) { _, uri ->
-            Handler(Looper.getMainLooper()).post {
-                if (isCrop) {
-                    crop(activity, uri)
-                } else {
-                    LogUtils.iTag(TAG, "scanFile camera or crop callback uri：%s", uri)
-                    listener?.onTakePicSuccess(uri)
-                    onDestroy(activity)
-                }
+    private fun scanFile(activity: Activity, file: File, isCrop: Boolean) {
+        file.scanFile(activity) { uri ->
+            if (isCrop) {
+                crop(activity, uri)
+            } else {
+                LogUtils.iTag(TAG, "scanFile camera or crop callback uri：%s", uri)
+                listener?.onTakePicSuccess(uri)
             }
         }
-    }
-
-    /**
-     * 摧毁本库的 PicActivity
-     */
-    private fun onDestroy(activity: Activity?) {
-        activity?.finish()
     }
 }

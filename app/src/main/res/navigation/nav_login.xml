@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_login"
+    app:startDestination="@id/loginByCodeFragment">
+
+    <fragment
+        android:id="@+id/loginByCodeFragment"
+        android:name="com.mall.ninecommunity.view.fragment.LoginByCodeFragment"
+        android:label="fragment_login_by_code"
+        tools:layout="@layout/fragment_login_by_code">
+        <action
+            android:id="@+id/action_loginByCodeFragment_to_loginByPwdFragment"
+            app:destination="@id/loginByPwdFragment" />
+        <action
+            android:id="@+id/action_loginByCodeFragment_to_loginBindingPhoneFragment"
+            app:destination="@id/loginBindingPhoneFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginByPwdFragment"
+        android:name="com.mall.ninecommunity.view.fragment.LoginByPwdFragment"
+        android:label="fragment_login_by_pwd"
+        tools:layout="@layout/fragment_login_by_pwd">
+
+        <action
+            android:id="@+id/action_loginByPwdFragment_to_loginBindingPhoneFragment"
+            app:destination="@id/loginBindingPhoneFragment" />
+        <action
+            android:id="@+id/action_loginByPwdFragment_to_forgetPwdFragment"
+            app:destination="@id/forgetPwdFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginBindingPhoneFragment"
+        android:name="com.mall.ninecommunity.view.fragment.LoginBindingPhoneFragment"
+        android:label="fragment_login_binding_phone"
+        tools:layout="@layout/fragment_login_binding_phone" />
+
+    <fragment
+        android:id="@+id/forgetPwdFragment"
+        android:name="com.mall.ninecommunity.view.fragment.ForgetPwdFragment"
+        android:label="fragment_forget_pwd"
+        tools:layout="@layout/fragment_forget_pwd" />
+
+    <fragment
+        android:id="@+id/invitationCodeFragment"
+        android:name="com.mall.ninecommunity.view.fragment.InvitationCodeFragment"
+        android:label="fragment_invitation_code"
+        tools:layout="@layout/fragment_invitation_code" />
+    <action
+        android:id="@+id/action_global_invitationCodeFragment"
+        app:destination="@id/invitationCodeFragment" />
+</navigation>

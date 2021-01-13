@@ -9,11 +9,6 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-/**
- *@Time :2019/11/4
- *@author: Lixiaoping
- *TODO :
- */
 object MiuiOs {
 
     private const val UNKNOWN = "UNKNOWN"

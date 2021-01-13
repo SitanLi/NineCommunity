@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.viewpager.widget.ViewPager
+import com.blankj.utilcode.util.LogUtils
 import com.mall.baselibrary.base.view.BaseFragment
 import com.mall.baselibrary.widget.ResourceUtils
 import com.mall.baselibrary.widget.tablayout.listener.CustomTabEntity
@@ -34,10 +35,10 @@ class PagerFragment : BaseFragment<FragmentPagerBinding>(), OnTabSelectListener,
         val tabList = titles.mapIndexed(listTab)
         dataBinding.tabLayout.setTabData(tabList)
         dataBinding.tabLayout.setOnTabSelectListener(this)
-        val fragments = mutableListOf<Fragment>(HomeFragment.newInstance("test1"), HomeFragment.newInstance("test2"),
-                HomeFragment.newInstance("test3"), HomeFragment.newInstance("test4"), HomeFragment.newInstance("test5"))
+        val fragments = mutableListOf<Fragment>(HomeFragment.newInstance("test1"), HomeFragment.newInstance("test1"), HomeFragment.newInstance("test1"), HomeFragment.newInstance("test1"), MineFragment.newInstance())
         dataBinding.viewPager.adapter = FragmentAdapter(childFragmentManager, fragments)
         dataBinding.viewPager.addOnPageChangeListener(this)
+
     }
 
     override fun initData() {

@@ -2,8 +2,8 @@ package com.mall.baselibrary.selector
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
-import android.view.View
 import androidx.core.view.ViewCompat
+import android.view.View
 import com.mall.baselibrary.selector.XSelectorHelper.dip2px
 
 class ShadowHelper private constructor() : Drawable() {
@@ -16,6 +16,8 @@ class ShadowHelper private constructor() : Drawable() {
         const val TOP = 0x0010
         const val RIGHT = 0x0100
         const val BOTTOM = 0x1000
+        const val BOTTOM_RIGHT = 0x1100
+        const val THREE_NO_TOP = 0x1101
 
         fun getInstance() = ShadowHelper()
     }
