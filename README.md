@@ -1,0 +1,5 @@
+# NineCommunity
+结合mmkv和jetpack开发的框架
+3，对navigation的使用，外层主业导航部分其实不适合使用 原因是框架每次都会重新刷新fragment
+4，结合使用navigation，不必追求一个项目只用一个activity
+5，hilt的引入使用
