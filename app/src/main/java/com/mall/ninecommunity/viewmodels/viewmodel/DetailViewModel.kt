@@ -5,7 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mall.baselibrary.base.viewModel.BaseViewModel
-import com.mall.ninecommunity.http.InternetCallback
+import com.mall.ninecommunity.ext.request
 import com.mall.ninecommunity.http.api.ApiService
 import com.mall.ninecommunity.model.NewsBean
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +23,9 @@ class DetailViewModel @ViewModelInject constructor(private var apiService: ApiSe
     fun toShow() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                apiService.news().enqueue(InternetCallback<NewsBean>(doNext = {
+                request({ apiService.news() }, {
                     newBeanLiveData.value = it
-                }))
+                })
             }
         }
     }

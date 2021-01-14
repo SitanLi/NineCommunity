@@ -5,10 +5,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mall.baselibrary.base.viewModel.BaseViewModel
-import com.mall.ninecommunity.http.InternetCallback
+import com.mall.ninecommunity.ext.request
 import com.mall.ninecommunity.http.api.ApiService
-import com.mall.ninecommunity.model.NewsBean
-import com.mall.ninecommunity.model.StoriesBean
 import com.mall.ninecommunity.model.TopStoriesBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,9 +21,9 @@ class HomeViewModel @ViewModelInject constructor(private var apiService: ApiServ
     fun loadDada() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                apiService.news().enqueue(InternetCallback<NewsBean>(doNext = {
-                    storiesBeanList.value = it.top_stories?.toMutableList()?: mutableListOf()
-                }))
+                request({ apiService.news() }, {
+                    storiesBeanList.value = it?.top_stories?.toMutableList() ?: mutableListOf()
+                })
             }
         }
     }

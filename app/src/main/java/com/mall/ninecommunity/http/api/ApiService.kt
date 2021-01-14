@@ -1,5 +1,6 @@
 package com.mall.ninecommunity.http.api
 
+import com.mall.ninecommunity.model.BaseModel
 import com.mall.ninecommunity.model.NewsBean
 import retrofit2.Call
 import retrofit2.http.GET
