@@ -58,7 +58,8 @@ ext {
             hilt_android          : "com.google.dagger:hilt-android:2.28-alpha",
             hilt_lifecycle        : 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02',
             hilt_android_compiler : "com.google.dagger:hilt-android-compiler:2.28-alpha",
-            hilt_compiler         : 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+            hilt_compiler         : 'androidx.hilt:hilt-compiler:1.0.0-alpha02',
+            aspectjx_core         : "org.aspectj:aspectjrt:1.9.5"
 
     ]
 }

@@ -78,5 +78,6 @@ dependencies {
     api rootProject.ext.dependencies.loadsir
     //multidex
     api rootProject.ext.dependencies.androidx_multidex
-
+    //aspectjx
+    api rootProject.ext.dependencies.aspectjx_core
 }
