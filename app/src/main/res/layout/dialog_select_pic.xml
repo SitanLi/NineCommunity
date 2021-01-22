@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    </data>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/select_album"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="@string/select_album"
+        android:textColor="#6e6490"
+        android:textSize="@dimen/font_medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/public_line_white" />
+
+    <TextView
+        android:id="@+id/select_camera"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="@string/select_camera"
+        android:textColor="#6e6490"
+        android:textSize="@dimen/font_medium" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:background="@color/public_line_white" />
+
+    <TextView
+        android:id="@+id/mCancel"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="@string/cancel_btn"
+        android:textColor="@color/public_light_grey_color"
+        android:textSize="@dimen/font_medium" />
+    </LinearLayout>
+</layout>

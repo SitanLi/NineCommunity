@@ -21,4 +21,8 @@ object Constants {
     object CacheKey {
         const val USER_INFO = "userInfo"
     }
+
+    object SPKey {
+        const val HEAD_IMG = "headImg"//头像sp
+    }
 }

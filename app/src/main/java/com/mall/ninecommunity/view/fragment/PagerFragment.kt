@@ -1,5 +1,6 @@
 package com.mall.ninecommunity.view.fragment
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -67,5 +68,12 @@ class PagerFragment : BaseFragment<FragmentPagerBinding>(), OnTabSelectListener,
 
     inner class PagerHandle {
         var currentItem = MutableLiveData<Int>()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        childFragmentManager.fragments.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }

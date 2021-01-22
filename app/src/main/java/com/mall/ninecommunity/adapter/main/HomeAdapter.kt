@@ -45,7 +45,7 @@ class HomeAdapter @Inject constructor() : ListAdapter<TopStoriesBean, RecyclerVi
     }
 
     class HomeViewHolder(
-            private val binding: ListItemNewsBinding,
+            private val binding: ListItemNewsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
@@ -57,9 +57,10 @@ class HomeAdapter @Inject constructor() : ListAdapter<TopStoriesBean, RecyclerVi
 
         private fun navigateToPlant(
                 topStoriesBean: TopStoriesBean?,
-                view: View,
+                view: View
         ) {
-            val directions = PagerFragmentDirections.actionPagerFragmentToWebViewFragment(topStoriesBean?.url ?: "")
+            val directions = PagerFragmentDirections.actionPagerFragmentToWebViewFragment(topStoriesBean?.url
+                    ?: "")
             view.findNavController().navigate(directions)
         }
 
