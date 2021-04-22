@@ -18,26 +18,13 @@ android {
     }
 
     signingConfigs {
-        official {
-            storeFile file("nine_community.keystore")
-            storePassword "jiujun9shows"
-            keyAlias "nine_community"
-            keyPassword "jiujun9shows"
-        }
+      
     }
 
     productFlavors {
-
-        //(官方包)包名：com.mall.ninecommunity  签名：9a52de3e5c50d2e5d1375a41d00b6f24  签名文件：nine_community.keystore
         product_official {
             signingConfig signingConfigs.official
             applicationId "com.mall.ninecommunity"
-            manifestPlaceholders = [package_name      : "com.mall.ninecommunity",
-                                    CHANNEL_VALUE     : "official",
-                                    UMENG_APPKEY_VALUE: "5e4678e5cb23d271b50003e5",
-                                    TENCENT_VALUE     : "1110040249",
-                                    WX_VALUE          : "wx04ce88dd34b158bd",
-                                    ShareTrace        : "d03b10152cb7fc1d"]
         }
     }
 
