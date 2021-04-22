@@ -61,7 +61,7 @@ android {
 
 android.applicationVariants.all { variant ->
     variant.outputs.all { output ->
-        def apkName = "jiujun_${variant.flavorName}"
+        def apkName = "jiuji_${variant.flavorName}"
         def fileName = "${variant.buildType.getName()}_${apkName}_${variant.versionName}.apk"
         outputFileName = fileName
     }
